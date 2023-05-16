@@ -1,8 +1,8 @@
 {
   "name": "artmart",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node index"
+    "start": "node app"
   },
   "dependencies": {
     "express": "^4.18.2",
