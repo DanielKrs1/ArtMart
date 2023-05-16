@@ -1,6 +1,5 @@
 const express = require("express");
 const logger = require("morgan");
-const db = require("./db/connection")
 
 const PORT = process.env.PORT || 8080;
 
