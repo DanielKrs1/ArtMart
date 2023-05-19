@@ -1,10 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <%- include('templates/metadata') -%>
-    <title>Transaction History - ArtMart</title>
+    <%- include('templates/metadata') %>
+        <title>Transaction History - ArtMart</title>
 </head>
+
 <body>
-    
+    <%- include('templates/navbar') %>
+    <div class="container center-align">
+        <h1>Transactions</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>Artwork</th>
+                    <!-- <th>Price</th> -->
+                    <th>Time editted</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            <% for (const transaction of transactions) { %>
+                <tr>
+                    <td><%= transaction.senderName %></td>
+                    <td><%= transaction.receiverName %></td>
+                    <td><%= transaction.artName %></td>
+                    <!-- <td>$0.87</td> -->
+                    <td style="color: gray; font-size: 0.8em">
+                        <%= new Date(transaction.timeStarted).toLocaleDateString("en-US", { hour: "numeric", minute: "numeric", second: "numeric" }) %>
+                    </td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+    <%- include('templates/footer') %>
 </body>
+
 </html>

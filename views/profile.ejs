@@ -5,6 +5,38 @@
     <title>Profile - ArtMart</title>
 </head>
 <body>
-    
+    <%- include('templates/navbar') -%>
+    <div class="container center-align">
+        <!-- <h1>Profile</h1> -->
+        <br>
+        <br>
+        <i class="material-icons" style="font-size: 10em;">account_circle</i>
+        <h3 style="margin-top: -.2em"><%= user.name %></h3>
+
+        <ul class="collection with-header" style="border: none; font-size: 1.2em; width: 80%; margin-left: 10%">
+            <li class="collection-item">
+                <a href="/app/gallery">Gallery
+                    <div class="secondary-content blue-text">
+                        <i class="material-icons">arrow_forward</i>
+                    </div>
+                </a>
+            </li>
+            <li class="collection-item">
+                <a href="/app/editor">Art Editor
+                    <div class="secondary-content blue-text">
+                        <i class="material-icons">arrow_forward</i>
+                    </div>
+                </a>
+            </li>
+            <li class="collection-item">
+                <a href="/app/transactions">Transaction History
+                    <div class="secondary-content blue-text">
+                        <i class="material-icons">arrow_forward</i>
+                    </div>
+                </a>
+            </li>
+        </ul>    
+    </div>
+    <%- include('templates/footer') -%>
 </body>
 </html>

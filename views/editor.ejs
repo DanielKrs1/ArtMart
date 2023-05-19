@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('templates/metadata') -%>
+    <title>Editor - ArtMart</title>
+
+    <style>
+        iframe {
+            border: none;
+            outline: none;
+            border: #039be5 3px solid;
+            border-radius: 5px;
+            width: 70%;
+            height: 70%;
+        }
+    </style>
+</head>
+<body>
+    <%- include('templates/navbar') -%>
+    <div class="container center-align">
+        <h1>Art Editor</h1>
+
+        <iframe src="/editor/plugin.html">
+
+        </iframe>
+    </div>
+    <%- include('templates/footer') -%>
+</body>
+</html>
