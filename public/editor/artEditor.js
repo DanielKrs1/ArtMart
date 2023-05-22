@@ -1,9 +1,8 @@
 const CANVAS_SIZE = 16;
-const RESOLUTION = 16;
-const PIXEL_SIZE = CANVAS_SIZE / RESOLUTION;
 const COLORS = [
     [0, 0, 0],
     [255, 0, 0],
+    [255, 20, 147],
     [0, 255, 0],
     [0, 0, 255],
     [255, 255, 255],
@@ -12,6 +11,12 @@ const TOOLS = {
     brush : 0,
     fill : 1
 }
+const DIRECTIONS = [
+    [0, 1],
+    [1, 0],
+    [0, -1],
+    [-1, 0]
+]
 
 let grid = [];
 let selectedColorIndex;
@@ -22,7 +27,7 @@ function setup() {
     let canvas = createCanvas(CANVAS_SIZE, CANVAS_SIZE);
     canvas.parent(canvasContainer);
 
-    setSelectedColorIndex(4);
+    setSelectedColorIndex(5);
     setSelectedTool(TOOLS.brush);
     initializeGrid();
     createColorButtons();
@@ -32,23 +37,15 @@ function setup() {
 function updateDraw() {
     strokeWeight(0);
 
-    for (let x = 0; x < RESOLUTION; x++) {
-        for (let y = 0; y < RESOLUTION; y++) {
+    for (let x = 0; x < CANVAS_SIZE; x++) {
+        for (let y = 0; y < CANVAS_SIZE; y++) {
             let colorIndex = grid[x][y];
             let color = COLORS[colorIndex];
 
             fill(color[0], color[1], color[2]);
-            rect(x * PIXEL_SIZE, y * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
+            rect(x, y, 1, 1);
         }
     }
-
-    // stroke(0);
-    // strokeWeight(2);
-    // let border = CANVAS_SIZE - 1;
-    // line(0, 0, 0, border);
-    // line(border, 0, border, border);
-    // line(0, 0, border, 0);
-    // line(0, border, border, border);
 }
 
 function draw() {
@@ -75,11 +72,40 @@ function isMouseOffCanvas() {
 }
 
 function getMouseGridXY() {
-    return [floor(mouseX / PIXEL_SIZE), floor(mouseY / PIXEL_SIZE)];
+    return [floor(mouseX), floor(mouseY)];
 }
 
 function paintWithFill(startX, startY) {
-    throw new Error("Implement fill tool!");
+    let frontier = [xyToIndex(startX, startY)];
+    let extended = [];
+    let colorToFill = grid[startX][startY];
+
+    while (frontier.length > 0) {
+        let current = frontier.pop();
+        extended.push(current);
+        current = indexToXY(current);
+        grid[current[0]][current[1]] = selectedColorIndex;
+
+        DIRECTIONS.forEach((direction) => {
+            let neighbor = [current[0] + direction[0], current[1] + direction[1]];
+            let neighborIndex = xyToIndex(neighbor[0], neighbor[1]);
+
+            if (!isOffCanvas(neighbor[0], neighbor[1]) && !extended.includes(neighborIndex) && grid[neighbor[0]][neighbor[1]] == colorToFill)
+                frontier.push(neighborIndex);
+        });
+    }
+}
+
+function xyToIndex(x, y) {
+    return y * CANVAS_SIZE + x;
+}
+
+function indexToXY(i) {
+    return [i % CANVAS_SIZE, floor(i / CANVAS_SIZE)];
+}
+
+function isOffCanvas(x, y) {
+    return x < 0 || y < 0 || x >= CANVAS_SIZE || y >= CANVAS_SIZE;
 }
 
 function setSelectedColorIndex(i) {
@@ -91,10 +117,10 @@ function setSelectedTool(tool) {
 }
 
 function initializeGrid() {
-    for (let x = 0; x < RESOLUTION; x++) {
+    for (let x = 0; x < CANVAS_SIZE; x++) {
         let column = [];
 
-        for (let y = 0; y < RESOLUTION; y++)
+        for (let y = 0; y < CANVAS_SIZE; y++)
             column.push(selectedColorIndex);
 
         grid.push(column);        
