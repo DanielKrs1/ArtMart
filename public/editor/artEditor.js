@@ -1,4 +1,4 @@
-const CANVAS_SIZE = 400;
+const CANVAS_SIZE = 16;
 const RESOLUTION = 16;
 const PIXEL_SIZE = CANVAS_SIZE / RESOLUTION;
 const COLORS = [
@@ -42,13 +42,13 @@ function updateDraw() {
         }
     }
 
-    stroke(0);
-    strokeWeight(2);
-    let border = CANVAS_SIZE - 1;
-    line(0, 0, 0, border);
-    line(border, 0, border, border);
-    line(0, 0, border, 0);
-    line(0, border, border, border);
+    // stroke(0);
+    // strokeWeight(2);
+    // let border = CANVAS_SIZE - 1;
+    // line(0, 0, 0, border);
+    // line(border, 0, border, border);
+    // line(0, 0, border, 0);
+    // line(0, border, border, border);
 }
 
 function draw() {
