@@ -18,8 +18,14 @@
     <%- include('templates/navbar') -%>
     <div class="container center-align">
         <h1>Art Editor</h1>
-        <iframe width="500" height="600" src="/editor/plugin.html"></iframe>
+        
+        <div id="canvas-container">
+
+        </div>
     </div>
     <%- include('templates/footer') -%>
+
+    <script src="/editor/p5.js"></script>
+    <script src="/editor/artEditor.js"></script>
 </body>
 </html>

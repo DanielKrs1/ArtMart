@@ -18,7 +18,7 @@ let selectedColorIndex;
 let selectedTool;
 
 function setup() {
-    let canvasContainer = document.getElementById("canvasContainer");
+    let canvasContainer = document.getElementById("canvas-container");
     let canvas = createCanvas(CANVAS_SIZE, CANVAS_SIZE);
     canvas.parent(canvasContainer);
 
