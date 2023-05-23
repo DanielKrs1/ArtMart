@@ -5,6 +5,7 @@ const COLORS = [
     [255, 20, 147],
     [0, 255, 0],
     [0, 0, 255],
+    [38, 198, 218],
     [255, 255, 255],
 ]
 const TOOLS = {
@@ -27,7 +28,7 @@ function setup() {
     let canvas = createCanvas(CANVAS_SIZE, CANVAS_SIZE);
     canvas.parent(canvasContainer);
 
-    setSelectedColorIndex(5);
+    setSelectedColorIndex(6);
     setSelectedTool(TOOLS.brush);
     initializeGrid();
     createColorButtons();
