@@ -25,7 +25,16 @@ const DIRECTIONS = [
     [-1, 0]
 ]
 
+class Change {
+    constructor(colorIndex, coordIndex) {
+        this.colorIndex = colorIndex;
+        this.coordIndexes = coordIndex;
+    }
+}
+
 let grid = [];
+let changes = [];
+let undoneChanges = [];
 let selectedColorIndex;
 let selectedTool;
 
@@ -61,6 +70,7 @@ function draw() {
     
     let xy = getMouseGridXY();
     grid[xy[0]][xy[1]] = selectedColorIndex;
+    changes.push(new Change(selectedColorIndex, [xyToIndex(xy)]));
 
     updateDraw();
 }
@@ -101,6 +111,8 @@ function paintWithFill(startX, startY) {
                 frontier.push(neighborIndex);
         });
     }
+
+    changes.push(new Change(selectedColorIndex, extended));
 }
 
 function xyToIndex(x, y) {
@@ -113,6 +125,14 @@ function indexToXY(i) {
 
 function isOffCanvas(x, y) {
     return x < 0 || y < 0 || x >= CANVAS_SIZE || y >= CANVAS_SIZE;
+}
+
+function undo() {
+    throw new Error("Implement undo()");
+}
+
+function redo() {
+    throw new Error("Implement redo()");
 }
 
 function setSelectedColorIndex(i) {
@@ -147,7 +167,8 @@ function createColorButtons() {
 
     createButton("Brush").mouseClicked(() => setSelectedTool(TOOLS.brush));
     createButton("Fill").mouseClicked(() => setSelectedTool(TOOLS.fill));
-
+    createButton("Undo").mouseClicked(undo);
+    createButton("Redo").mouseClicked(redo);
 }
 
 function colorToHex(color) {
