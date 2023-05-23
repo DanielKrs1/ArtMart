@@ -1,5 +1,6 @@
 const express = require("express");
 const logger = require("morgan");
+const colors = require("./colors");
 
 const PORT = process.env.PORT || 8080;
 
@@ -14,7 +15,7 @@ app.set("view engine", "ejs");
 
 // remove on oauth
 app.get("/login", (req, res) => res.redirect("/app/profile"))
-
+app.get("/colors.json", (req, res) => res.json(colors).end());
 app.get("/", (req, res) => {
     res.render("index");
 });
@@ -25,7 +26,7 @@ app.get("/app/profile", (req, res) => {
     res.render("profile", {user: {name: "Test Account"}});
 });
 app.get("/app/editor", (req, res) => {
-    res.render("editor");
+    res.render("editor", { colors });
 });
 app.get("/app/transactions", (req, res) => {
     res.render("transactions", { transactions: [

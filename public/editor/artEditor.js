@@ -1,19 +1,5 @@
+let COLORS = null; // set at the bttom
 const CANVAS_SIZE = 16;
-const COLORS = [
-    [0, 0, 0],
-    [128, 128, 128],
-    [255, 255, 255],
-    [255, 0, 0],
-    [255, 128, 0],
-    [255, 255, 0],
-    [0, 255, 0],
-    [0, 255, 255],
-    [0, 0, 255],
-    [255, 0, 255],
-    [128, 0, 255],
-    [0, 128, 0],
-    [128, 64, 0]
-]
 const TOOLS = {
     brush : 0,
     fill : 1
@@ -34,15 +20,19 @@ function setup() {
     let canvas = createCanvas(CANVAS_SIZE, CANVAS_SIZE);
     canvas.parent(canvasContainer);
 
+    setUpButtons();
     setSelectedColorIndex(2);
     setSelectedTool(TOOLS.brush);
     initializeGrid();
-    createColorButtons();
     updateDraw();
 }
   
 function updateDraw() {
     strokeWeight(0);
+    if (!COLORS) {
+        fill("white");
+        return rect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    }
 
     for (let x = 0; x < CANVAS_SIZE; x++) {
         for (let y = 0; y < CANVAS_SIZE; y++) {
@@ -134,24 +124,32 @@ function initializeGrid() {
     }
 }
 
-function createColorButtons() {
-    for (let i = 0; i < COLORS.length; i++) { 
-        let color = COLORS[i];
-        let hex = colorToHex(color);
-
-        let button = createButton("_");
-        button.style("background-color", hex);
-        button.style("color", hex);
-        button.mouseClicked(() => setSelectedColorIndex(((x) => x)(i)));
-    }
-
-    createButton("Brush").mouseClicked(() => setSelectedTool(TOOLS.brush));
-    createButton("Fill").mouseClicked(() => setSelectedTool(TOOLS.fill));
-
-}
-
 function colorToHex(color) {
     let hex = "#";
     color.forEach(value => hex += value.toString(16).padStart(2, "0"));
     return hex;
+}
+function hexToColor(hex) {
+    return hex.slice(1).match(/../g).map(e => parseInt(e, 16));
+}
+
+
+function setUpButtons() {
+    const colorButtons = document.querySelectorAll('.color-btn');
+
+    COLORS = []
+    for (let i = 0; i < colorButtons.length; i++) { 
+        const colorIdx = i;
+        const button = colorButtons[i];
+        const color = hexToColor(button.getAttribute('x-hex'));
+        COLORS[i] = color;
+        button.addEventListener('click', () => {
+            setSelectedColorIndex(colorIdx);
+        });
+    }
+
+    // const fillBtn = document.querySelector('.fill-btn');
+    // const brushBtn = document.querySelector('.brush-btn');
+    // fillBtn.addEventListener('click', () => setSelectedTool(TOOLS.brush));
+    // brushBtn.addEventListener('click', () => setSelectedTool(TOOLS.brush));
 }

@@ -25,6 +25,15 @@
         <div id="canvas-container">
 
         </div>
+        <br>
+        <div id="color-grid">
+            <% for (const color of colors) { %>
+            <a class="btn-floating btn-large waves-effect waves-light color-btn"
+                x-hex="<%= color %>"
+                style="color: <%= color %>; background-color: <%= color %>">
+            </a>
+            <% } %>
+        </div>
     </div>
     <%- include('templates/footer') -%>
 
