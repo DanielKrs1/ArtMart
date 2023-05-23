@@ -153,3 +153,11 @@ function setUpButtons() {
     // fillBtn.addEventListener('click', () => setSelectedTool(TOOLS.brush));
     // brushBtn.addEventListener('click', () => setSelectedTool(TOOLS.brush));
 }
+
+function getArtDataString() {
+
+}
+
+function createArtFromDataString() {
+    
+}
