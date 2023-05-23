@@ -35,7 +35,7 @@ function setup() {
     let canvas = createCanvas(CANVAS_SIZE, CANVAS_SIZE);
     canvas.parent(canvasContainer);
 
-    setSelectedColorIndex(6);
+    setSelectedColorIndex(2);
     setSelectedTool(TOOLS.brush);
     initializeGrid();
     createColorButtons();
@@ -148,6 +148,7 @@ function createColorButtons() {
 
     createButton("Brush").mouseClicked(() => setSelectedTool(TOOLS.brush));
     createButton("Fill").mouseClicked(() => setSelectedTool(TOOLS.fill));
+
 }
 
 function colorToHex(color) {
