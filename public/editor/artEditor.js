@@ -154,3 +154,11 @@ function colorToHex(color) {
     color.forEach(value => hex += value.toString(16).padStart(2, "0"));
     return hex;
 }
+
+function getArtDataString() {
+
+}
+
+function createArtFromDataString() {
+    
+}
