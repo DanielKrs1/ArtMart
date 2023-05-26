@@ -1,4 +1,4 @@
-let COLORS = null; // set at the bttom
+let COLORS = null;
 const CANVAS_SIZE = 16;
 const TOOLS = {
     brush : 0,
