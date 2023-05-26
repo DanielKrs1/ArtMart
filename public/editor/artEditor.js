@@ -124,7 +124,6 @@ function initializeGrid() {
     }
 }
 
-<<<<<<< HEAD
 function createColorButtons() {
     for (let i = 0; i < COLORS.length; i++) { 
         let color = COLORS[i];
@@ -135,28 +134,22 @@ function createColorButtons() {
         button.style("color", hex);
         button.mouseClicked(() => setSelectedColorIndex(((x) => x)(i)));
     }
-
-    createButton("Brush").mouseClicked(() => setSelectedTool(TOOLS.brush));
-    createButton("Fill").mouseClicked(() => setSelectedTool(TOOLS.fill));
-    createButton("Test Save").mouseClicked(() => getArtDataString());
 }
 
-=======
->>>>>>> 103c743c216da06805f01387677040e02e4a7c28
 function colorToHex(color) {
     let hex = "#";
     color.forEach(value => hex += value.toString(16).padStart(2, "0"));
     return hex;
 }
+
 function hexToColor(hex) {
     return hex.slice(1).match(/../g).map(e => parseInt(e, 16));
 }
 
-
 function setUpButtons() {
     const colorButtons = document.querySelectorAll('.color-btn');
 
-    COLORS = []
+    COLORS = [];
     for (let i = 0; i < colorButtons.length; i++) { 
         const colorIdx = i;
         const button = colorButtons[i];
@@ -167,10 +160,8 @@ function setUpButtons() {
         });
     }
 
-    // const fillBtn = document.querySelector('.fill-btn');
-    // const brushBtn = document.querySelector('.brush-btn');
-    // fillBtn.addEventListener('click', () => setSelectedTool(TOOLS.brush));
-    // brushBtn.addEventListener('click', () => setSelectedTool(TOOLS.brush));
+    document.getElementById("BrushButton").addEventListener("click", () => setSelectedTool(TOOLS.brush));
+    document.getElementById("FillButton").addEventListener("click", () => setSelectedTool(TOOLS.fill));
 }
 
 function getArtDataString() {
@@ -186,6 +177,12 @@ function getArtDataString() {
     return data;
 }
 
-function createArtFromDataString() {
-    
+function createArtFromDataString(dataString) {
+    for (let i = 0; i < CANVAS_SIZE * CANVAS_SIZE; i++) {
+        let xy = indexToXY(i);
+        let colorIndex = parseInt(dataString.charAt(i));
+        grid[xy[0]][xy[1]] = colorIndex;
+    }
+
+    updateDraw();
 }

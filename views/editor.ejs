@@ -22,22 +22,23 @@
     <div class="container center-align">
         <h1>Art Editor</h1>
         
-        <div id="canvas-container">
-
-        </div>
+        <div id="canvas-container"></div>
         <br>
         <div id="color-grid">
             <% for (const color of colors) { %>
-            <a class="btn-floating btn-large waves-effect waves-light color-btn"
-                x-hex="<%= color %>"
-                style="color: <%= color %>; background-color: <%= color %>">
-            </a>
+                <a class="btn-floating btn-large waves-effect waves-light color-btn"
+                    x-hex="<%= color %>"
+                    style="color: <%= color %>; background-color: <%= color %>">
+                </a>
             <% } %>
+            <a id="BrushButton" class="btn-floating btn-large waves-effect waves-light">Brush</a>
+            <a id="FillButton" class="btn-floating btn-large waves-effect waves-light">Fill</a>
         </div>
     </div>
     <%- include('templates/footer') -%>
 
     <script src="/editor/p5.js"></script>
     <script src="/editor/artEditor.js"></script>
+    <br>
 </body>
 </html>
