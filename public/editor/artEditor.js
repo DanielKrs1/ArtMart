@@ -147,6 +147,7 @@ function createColorButtons() {
 
     createButton("Brush").mouseClicked(() => setSelectedTool(TOOLS.brush));
     createButton("Fill").mouseClicked(() => setSelectedTool(TOOLS.fill));
+    createButton("Test Save").mouseClicked(() => getArtDataString());
 }
 
 function colorToHex(color) {
@@ -156,7 +157,16 @@ function colorToHex(color) {
 }
 
 function getArtDataString() {
+    let data = "";
 
+    grid.forEach((row) =>
+        row.forEach((colorIndex) => {
+            data += colorIndex.toString(36);
+        })
+    );
+
+    console.log(data);
+    return data;
 }
 
 function createArtFromDataString() {
