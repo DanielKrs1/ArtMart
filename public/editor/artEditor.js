@@ -160,8 +160,8 @@ function setUpButtons() {
         });
     }
 
-    document.getElementById("BrushButton").addEventListener("click", () => setSelectedTool(TOOLS.brush));
-    document.getElementById("FillButton").addEventListener("click", () => setSelectedTool(TOOLS.fill));
+    document.getElementById("brush-btn").addEventListener("click", () => setSelectedTool(TOOLS.brush));
+    document.getElementById("fill-btn").addEventListener("click", () => setSelectedTool(TOOLS.fill));
 }
 
 function getArtDataString() {
