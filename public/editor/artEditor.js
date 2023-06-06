@@ -14,6 +14,7 @@ const DIRECTIONS = [
 let grid = [];
 let selectedColorIndex;
 let selectedTool;
+let selectText;
 
 function setup() {
     let canvasContainer = document.getElementById("canvas-container");
@@ -111,6 +112,15 @@ function setSelectedColorIndex(i) {
 
 function setSelectedTool(tool) {
     selectedTool = tool;
+
+    switch (selectedTool) {
+        case TOOLS.brush:
+            selectText.innerText = "Current Tool: Brush";
+            break;
+        case TOOLS.fill:
+            selectText.innerText = "Current Tool: Fill";
+            break;
+    }
 }
 
 function initializeGrid() {
@@ -162,6 +172,7 @@ function setUpButtons() {
 
     document.getElementById("brush-btn").addEventListener("click", () => setSelectedTool(TOOLS.brush));
     document.getElementById("fill-btn").addEventListener("click", () => setSelectedTool(TOOLS.fill));
+    selectText = document.getElementById("selected-text");
 }
 
 function getArtDataString() {
