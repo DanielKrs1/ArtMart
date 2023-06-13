@@ -21,7 +21,10 @@
     <%- include('templates/navbar') -%>
     <div class="container center-align">
         <h1>Art Editor</h1>
-        
+        <div class="row">
+            <div class="col s3"></div>
+            <input class="col s6 center-align" id="art-name" value="Anonymous Doodle <%= Math.random().toString(16).split('.')[1] %>">
+        </div>
         <div id="canvas-container"></div>
         <br>
         <div id="color-grid">
@@ -39,15 +42,15 @@
                     x-hex="<%= colors[i] %>"
                     style="color: <%= colors[i] %>; background-color: <%= colors[i] %>">
                 </a>
-                <% if ((i % 6) == 5) { %>
+                <% if ((i % 6) == 5 && i !== colors.length - 1) { %>
                     <br>
                     <br>
                 <% } %>
             <% } %>
             <br>
             <br>
-            <a class="btn-large waves-effect waves-light cyan">
-                Submit
+            <a class="btn-large waves-effect waves-light green" id="save-art">
+                Save
             </a>
         </div>
     </div>
@@ -55,6 +58,7 @@
 
     <script src="/editor/p5.js"></script>
     <script src="/editor/artEditor.js"></script>
+    <script src="/editor/ui.js"></script>
     <br>
 </body>
 </html>
