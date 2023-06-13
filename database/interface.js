@@ -14,7 +14,7 @@ const db = {
         async fetch(artId) {},
     },
     transactions: {
-        async create()
+        async create() {}
     },
     user: {},
 }
