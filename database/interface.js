@@ -1,20 +1,23 @@
 const db = {
     artCategory: {
-        async insert(categoryName) {
+        async create(categoryName) {
 
         },
         async list() {
 
         },
-        async delete(categoryId) {}
+        async fetch(categoryId) {}
     },
     art: {
         async create(categoryId, ownerId) {},
-        async insert(artId, artData) {},
+        async edit(artId, artData) {},
         async fetch(artId) {},
     },
     transactions: {
-        async create()
+        async create(fromId, toId, artId) {},
+        async list(userId) {} // should return a list of any transaction who's fromId or toId == userId
     },
-    user: {},
+    user: {
+        async create(email) {}
+    },
 }
