@@ -1,5 +1,5 @@
 const express = require('express')
-const frontend = express.frontend();
+const frontend = express.Router();
 const colors = require("../colors.config.js");
 
 frontend.get("/colors.json", (req, res) => res.json(colors).end());
