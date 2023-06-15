@@ -1,4 +1,2 @@
-SELECT
-*
-FROM
-art;
+SELECT *
+FROM art;

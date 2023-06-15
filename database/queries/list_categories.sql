@@ -1,2 +1,2 @@
 SELECT *
-from art_category;
+FROM art_category;

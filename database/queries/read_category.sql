@@ -1,6 +1,6 @@
 SELECT
-      category_name
+    category_name
 FROM
-      art_category
+    art_category
 WHERE
-      category_id = ?;
+    category_id = ?;

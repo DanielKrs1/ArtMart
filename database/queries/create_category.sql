@@ -1,3 +1,3 @@
 INSERT INTO art_category
-(category_name)
+    (category_name)
 VALUES (?);

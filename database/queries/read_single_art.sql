@@ -1,6 +1,3 @@
-SELECT
-*
-FROM
-art
-WHERE
-art_id = ?;
+SELECT *
+FROM art
+WHERE art_id = ?;

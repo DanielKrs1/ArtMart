@@ -1,6 +1,3 @@
-SELECT
-*
-FROM
-art
-WHERE
-owner_id = ?;
+SELECT *
+FROM art
+WHERE owner_id = ?;
