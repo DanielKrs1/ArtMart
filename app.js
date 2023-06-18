@@ -1,9 +1,25 @@
 const express = require("express");
 const logger = require("morgan");
 
+require("dotenv").config();
+
 const PORT = process.env.PORT || 8080;
 
 const app = express();
+
+const { auth } = require('express-openid-connect');
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.AUTH0_SECRET,
+  baseURL: process.env.AUTH0_BASEURL,
+  clientID: process.env.AUTH0_CLIENT_ID,
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASEURL
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
 
 app.use(logger("dev"));
 app.use(express.static(__dirname + '/public'));
