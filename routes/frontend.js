@@ -10,8 +10,9 @@ frontend.get("/gallery", (req, res) => {
 frontend.get("/profile", (req, res) => {
     res.render("profile", {user: {name: "Test Account"}});
 });
-frontend.get("/editor", (req, res) => {
-    res.render("editor", { colors });
+frontend.get("/editor", async (req, res) => {
+    categories = await require('./database/interface.js').artCategory.list();
+    res.render("editor", { colors, categories });
 });
 frontend.get("/transactions", (req, res) => {
     res.render("transactions", { transactions: [
