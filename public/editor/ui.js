@@ -7,5 +7,16 @@ document.querySelector('#save-art').addEventListener("click", () => {
     }
 
     const name = nameHolder.value;
+
+    // fetch("/api/art", {
+    //     body: JSON.stringify({
+    //         name,
+    //         category
+    //     }),
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application-data/json",
+    //     }
+    // })
 });
 

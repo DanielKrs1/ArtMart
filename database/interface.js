@@ -78,6 +78,9 @@ const db = {
         },
         async listArt(ownerId) {
             return db.art.listByUser(ownerId);
+        },
+        async getByEmail(email) {
+            return await runquery(SQL.read_user, [ email ]);
         }
     },
 }
