@@ -1,22 +1,29 @@
 const nameHolder = document.querySelector('#art-name');
-
+const categoryHolder = document.querySelector("#category");
 document.querySelector('#save-art').addEventListener("click", () => {
-    if (!nameHolder.value) {
+    const name = nameHolder.value;
+    if (!name) {
         alert("Please choose a name!");
         return;
     }
 
-    const name = nameHolder.value;
+    const category = categoryHolder.value;
+    if (!category) {
+        return alert("Please choose a category!");
+    }
 
-    // fetch("/api/art", {
-    //     body: JSON.stringify({
-    //         name,
-    //         category
-    //     }),
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application-data/json",
-    //     }
-    // })
+    fetch("/api/art", {
+        body: JSON.stringify({
+            name,
+            category: parseInt(category),
+            data: getArtDataString()
+        }),
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then(() => {
+        location = "/app/gallery"
+    })
 });
 

@@ -24,11 +24,11 @@
             <tbody>
             <% for (const transaction of transactions) { %>
                 <tr>
-                    <td><%= transaction.senderName %></td>
-                    <td><%= transaction.receiverName %></td>
-                    <td><%= transaction.artName %></td>
+                    <td><%= transaction.from_user.user_email %></td>
+                    <td><%= transaction.to_user.user_email %></td>
+                    <td><a href="/app/view/<%=transaction.art_id%>"><%= transaction.art.art_name %></a></td>
                     <td style="color: gray; font-size: 0.8em">
-                        <%= new Date(transaction.timeStarted).toLocaleDateString("en-US", { hour: "numeric", minute: "numeric", second: "numeric" }) %>
+                        <%= new Date(transaction.transaction_time).toLocaleDateString("en-US", { hour: "numeric", minute: "numeric", second: "numeric" }) %>
                     </td>
                 </tr>
             <% } %>

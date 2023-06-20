@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('templates/metadata') -%>
+    <title>Editor - ArtMart</title>
+
+    <style>
+        canvas {
+            border: none;
+            outline: none;
+            border: #039be5 3px solid;
+            border-radius: 5px;
+            justify-content: center;
+            width: 50% !important;
+            height: auto !important;
+            image-rendering: pixelated;
+        }
+    </style>
+
+</head>
+<body>
+    <%- include('templates/navbar') -%>
+    <div class="container center-align">
+        <h1>Art Editor</h1>
+        <div class="row">
+            <div class="col s3"></div>
+            <input type="text" disabled style="color: black" class="col s6 center-align" id="art-name" value="Name: <%= art.art_name %>">
+        </div>
+        <canvas width="16" height="16" class="gallery-img" data-art="<%= art.art_data %>"></canvas>
+        <br>
+        <a id="claim" class="btn-floating btn-large waves-effect waves-light red">
+            CLAIM
+        </a>
+        <p>
+            Created by: <%= creator.user_email %>
+            <br>
+            Owned by: <%= owner.user_email %>
+            <br>
+            Category: <%= category.category_name %>
+        </p>
+    </div>
+    <script data-colors="<%= JSON.stringify(colors) %>">
+        const COLORS = JSON.parse(document.currentScript.dataset.colors)
+    </script>
+    <script src="/render.js"></script>
+    <script>
+        for (const art of document.querySelectorAll("canvas[data-art]")) {
+            drawArt(art.dataset.art, art);
+        }
+    </script>
+    <script data-artid="<%= art.art_id %>">
+        const artid = document.currentScript.dataset.artid;
+        document.querySelector("#claim").addEventListener('click', () => {
+            fetch("/api/claim/" + artid, {
+                method: 'GET'
+            }).then(() => {
+                location.reload()
+            })
+        })
+    </script>
+    <%- include('templates/footer') -%>
+    <br>
+</body>
+</html>

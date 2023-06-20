@@ -184,7 +184,6 @@ function getArtDataString() {
         })
     );
 
-    console.log(data);
     return data;
 }
 

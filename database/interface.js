@@ -6,7 +6,8 @@ const SQL = Object.create(null);
 const __sqlqueryFiles = fs.readdirSync(path.join(__dirname, "./queries/"), { withFileTypes: true });
 for (const sqlFile of __sqlqueryFiles) {
     if (sqlFile.isFile() && sqlFile.name.endsWith(".sql")) {
-        SQL[sqlFile.name.slice(0, 0 - ".sql".length)] = fs.readFileSync(sqlFile.path);
+
+        SQL[sqlFile.name.slice(0, 0 - ".sql".length)] = fs.readFileSync((path.join(__dirname, "./queries/", sqlFile.name)), 'utf-8');
     }
 }
 
@@ -46,12 +47,12 @@ const db = {
     },
     art: {
         async create(artData, categoryId, ownerId, artName) {
-            return await runquery(SQL.create_category, [ 
+            return await runquery(SQL.create_art, [ 
                 artData, categoryId, ownerId, artName, ownerId
              ]);
         },
         async setNewOwner(artId, ownerId) {
-            return await runquery(SQL.update_art_owner, [ ownerId, ownerId, artId ]);
+            return await runquery(SQL.update_art_owner, [ ownerId, artId ]);
         },
         async fetch(artId) {
             return await runquery(SQL.read_single_art, [ artId ])
@@ -69,7 +70,7 @@ const db = {
         },
         // should returns a list of any transaction who's fromId or toId == userId
         async listByUser(userId) {
-            return await runquery(SQL.read_transactios, [ userId, userId ]);
+            return await runquery(SQL.read_transactions, [ userId, userId ]);
         }
     },
     user: {
@@ -81,6 +82,9 @@ const db = {
         },
         async getByEmail(email) {
             return await runquery(SQL.read_user, [ email ]);
+        },
+        async fetch(id) {
+            return await runquery(SQL.read_user_id, [ id ]);
         }
     },
 }

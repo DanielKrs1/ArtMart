@@ -17,12 +17,6 @@
         }
     </style>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var elems = document.querySelectorAll('.dropdown-trigger');
-            var instances = M.Dropdown.init(elems, options);
-        });
-    </script>
 </head>
 <body>
     <%- include('templates/navbar') -%>
@@ -56,16 +50,16 @@
             <% } %>
             <br>
             <label>Category</label>
-            <select class="browser-default">
-                <option value="" disabled selected>Choose your option</option>
+            <select class="browser-default" id="category">
+                <option value="" disabled selected>Choose your category</option>
 
-                <% for (let i = 0; i < categories.length; i++) { %>
-                    <option value=<%= category.category_id %><%= category.category_name %>></option>
+                <% for (const category of categories) { %>
+                    <option value="<%= category.category_id %>"><%= category.category_name %></option>
                 <% } %>
             </select>
             <br>
             <a class="btn-large waves-effect waves-light cyan" id="save-art">
-                Save
+                Create!
             </a>
         </div>
     </div>

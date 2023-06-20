@@ -18,25 +18,22 @@
     <%- include('templates/navbar') -%>
     <div class="container center-align">
         <h1>Gallery</h1>
-        <img class="gallery-img" 
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAACtJREFUOE9jZGBg+M9AHGDEpgwkOGrAaBhQJR0Qlw5xqMKaPEkxcdQABgYAMbsKEcOaeVcAAAAASUVORK5CYII=">
-        <img class="gallery-img" 
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAACtJREFUOE9jZGBg+M9AHGDEpgwkOGrAaBhQJR0Qlw5xqMKaPEkxcdQABgYAMbsKEcOaeVcAAAAASUVORK5CYII=">
-        <img class="gallery-img" 
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAACtJREFUOE9jZGBg+M9AHGDEpgwkOGrAaBhQJR0Qlw5xqMKaPEkxcdQABgYAMbsKEcOaeVcAAAAASUVORK5CYII=">
-            <img class="gallery-img" 
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAACtJREFUOE9jZGBg+M9AHGDEpgwkOGrAaBhQJR0Qlw5xqMKaPEkxcdQABgYAMbsKEcOaeVcAAAAASUVORK5CYII=">
-        <img class="gallery-img" 
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAACtJREFUOE9jZGBg+M9AHGDEpgwkOGrAaBhQJR0Qlw5xqMKaPEkxcdQABgYAMbsKEcOaeVcAAAAASUVORK5CYII=">
-        <img class="gallery-img" 
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAACtJREFUOE9jZGBg+M9AHGDEpgwkOGrAaBhQJR0Qlw5xqMKaPEkxcdQABgYAMbsKEcOaeVcAAAAASUVORK5CYII=">
-            <img class="gallery-img" 
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAACtJREFUOE9jZGBg+M9AHGDEpgwkOGrAaBhQJR0Qlw5xqMKaPEkxcdQABgYAMbsKEcOaeVcAAAAASUVORK5CYII=">
-        <img class="gallery-img" 
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAACtJREFUOE9jZGBg+M9AHGDEpgwkOGrAaBhQJR0Qlw5xqMKaPEkxcdQABgYAMbsKEcOaeVcAAAAASUVORK5CYII=">
-        <img class="gallery-img" 
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAACtJREFUOE9jZGBg+M9AHGDEpgwkOGrAaBhQJR0Qlw5xqMKaPEkxcdQABgYAMbsKEcOaeVcAAAAASUVORK5CYII=">
+
+        <% for (const art of arts) { %>
+            <a href="/app/view/<%= art.art_id %>">
+                <canvas width="16" height="16" class="gallery-img" data-art="<%= art.art_data %>">
+            </a>
+        <% } %>
     </div>
+    <script data-colors="<%= JSON.stringify(colors) %>">
+        const COLORS = JSON.parse(document.currentScript.dataset.colors)
+    </script>
+    <script src="/render.js"></script>
+    <script>
+        for (const art of document.querySelectorAll("canvas[data-art]")) {
+            drawArt(art.dataset.art, art);
+        }
+    </script>
     <%- include('templates/footer') -%>
 </body>
 </html>
