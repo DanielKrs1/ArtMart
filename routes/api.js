@@ -12,8 +12,19 @@ api.get("/claim/:id", requiresAuth(), async (req, res) => {
         [user] = await db.user.getByEmail(req.oidc.user.email);
     }
 
+    // TODO not safe
+    const [art] = await db.art.fetch(parseInt(req.params.id));
+    const [old_owner] = await db.user.fetch(art.owner_id);
+
+    if (old_owner.user_id === user.user_id) {
+        return res.end();
+    }
+
 
     await db.art.setNewOwner(parseInt(req.params.id), user.user_id);
+    await db.transactions.create(old_owner.user_id, user.user_id, parseInt(req.params.id), new Date().toISOString().replace(/[a-z]/gi, ' ').trim().slice(0, -4))
+    
+    return res.end();
 });
 
 api.post("/art", requiresAuth(), express.json(), async (req, res) => {

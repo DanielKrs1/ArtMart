@@ -65,8 +65,8 @@ const db = {
         }
     },
     transactions: {
-        async create(fromId, toId, artId) {
-            return await runquery(SQL.create_transaction, [ fromId, toId, artId ])
+        async create(fromId, toId, artId, transactionTime) {
+            return await runquery(SQL.create_transaction, [ fromId, toId, artId, transactionTime ])
         },
         // should returns a list of any transaction who's fromId or toId == userId
         async listByUser(userId) {
